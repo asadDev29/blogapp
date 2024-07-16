@@ -22,7 +22,10 @@ class LoginView(ObtainAuthToken):
         token = response.data['token']
         user = Token.objects.get(key=token).user
         login(request, user)
-        return response
+        return Response({
+            'token': token,
+            'user_id': user.id
+        })
 
 class LogoutView(APIView):
     def post(self, request):
