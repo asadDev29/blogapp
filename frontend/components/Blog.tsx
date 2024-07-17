@@ -33,7 +33,7 @@ const Blog = ({ blog, deleteBlog }: IProps) => {
         {blog.title}
       </h4>
       <p>{blog.content.slice(0, 150)}...</p>
-      <Link className="text-blue-500 underline" href={`/blog/${blog.id}`}>
+      <Link className="text-blue-500 underline" href={`/b/${blog.id}`}>
         show more
       </Link>
     </div>

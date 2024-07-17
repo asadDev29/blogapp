@@ -18,11 +18,12 @@ import { IBlog } from "@/lib/types";
 import { getBlogs } from "@/lib/getBlogs";
 interface IProps {
   setBlogs: React.Dispatch<React.SetStateAction<IBlog[]>>;
+  blog?: IBlog;
 }
-export function AddBlog({ setBlogs }: IProps) {
+export function AddBlog({ setBlogs, blog }: IProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState(blog?.title || "");
+  const [content, setContent] = useState(blog?.content || "");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -36,6 +37,8 @@ export function AddBlog({ setBlogs }: IProps) {
         content,
         author: localStorage.getItem("user_id"),
       });
+      setContent("");
+      setTitle("");
       const fetchedBlogs = await getBlogs();
       setBlogs(fetchedBlogs);
       // Handle successful blog addition
@@ -88,13 +91,6 @@ export function AddBlog({ setBlogs }: IProps) {
           <DialogFooter>
             <Button className="inline-block ms-auto" type="submit">
               Create
-            </Button>
-            <Button
-              onClick={() => setIsOpen(false)}
-              className="inline-block ms-auto"
-              type="button"
-            >
-              close
             </Button>
           </DialogFooter>
         </form>

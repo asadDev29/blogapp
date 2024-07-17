@@ -67,6 +67,6 @@
     @apply bg-background text-foreground;
   }
   .container {
-    @apply w-[85%] p-3 py-5 max-w-[700px];
+    @apply w-[85%] p-3 py-5  max-w-[700px];
   }
 }
